@@ -1,30 +1,27 @@
+from contextlib import nullcontext
+
 import pytest
 
-from conftest import created_booking
 from src.string_utils import StringUtils
-from contextlib import nullcontext
+
 
 class TestStringUtils:
     @pytest.mark.parametrize(
-        "input_str, expected",
-        [
-            ("abc", "cba"),
-            ("", ""),
-            ("123", "321")
-        ]
+        "input_str", "expected", [("abc", "cba"), ("", ""), ("123", "321")]
     )
-    def test_reverse_string(self,input_str, expected):
+    def test_reverse_string(self, input_str, expected):
         utils = StringUtils()
         assert utils.reverse_string(input_str) == expected
 
     class TestStringUtils:
         @pytest.mark.parametrize(
-            "input_str, expected",
+            "input_str",
+            "expected",
             [
                 ("abc", nullcontext()),
                 (12345, pytest.raises(TypeError)),
-                (None, pytest.raises(TypeError))
-            ]
+                (None, pytest.raises(TypeError)),
+            ],
         )
         def test_revers_string_errors(self, input_str, expected):
             utils = StringUtils()
@@ -32,12 +29,13 @@ class TestStringUtils:
                 utils.reverse_string(input_str)
 
     @pytest.mark.parametrize(
-        "full_name, expected",
+        "full_name",
+        "expected",
         [
             ("Daniil Nikolaev", "DN"),
             ("Ivan Ivanov", "II"),
-            ("", pytest.raises(ValueError))
-        ]
+            ("", pytest.raises(ValueError)),
+        ],
     )
     def test_get_initials(self, full_name, expected):
         utils = StringUtils()
@@ -46,5 +44,3 @@ class TestStringUtils:
         else:
             with expected:
                 utils.get_initials(full_name)
-
-
