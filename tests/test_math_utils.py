@@ -6,3 +6,6 @@ def test_basic_math():
 
 def test_multiply():
     assert multiply(3, 5) == 15, "функция загрушена не правильно"
+
+def test_multiple_negative():
+    assert multiply(3, 5) == 15, "функция загрушена не правильно"
